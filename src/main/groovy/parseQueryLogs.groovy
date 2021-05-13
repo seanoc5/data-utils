@@ -26,9 +26,7 @@ Pattern queryPartsRegex = Pattern.compile(/^(.*) INFO *\([^)]+\) \[c:(.*) s:shar
 boolean includeUniveralQueries = false
 
 List<String> headers = ['timestamp', 'collection', 'query', 'hits', 'status', 'QTime', 'allParams']
-//File sourceLogFileDir = new File('/Users/sean/work/lucidworks/NWM/logs')
-//File sourceLogFileDir = new File('/opt/lucidworks/fusion/4.2.6/var/log/solr')
-File sourceLogFileDir = new File('/Users/sean/work/lucidworks/Argonne/logs')
+File sourceLogFileDir = new File('/Users/sean/work/lucidworks/logs')
 log.info "Using source log file dir: $sourceLogFileDir"
 Date currentTime = new Date()
 SimpleDateFormat sdf = new SimpleDateFormat('yyyy-MM-dd-hh-mm')
@@ -37,9 +35,6 @@ File outputCsv = new File("./queryLogsExtracted-${datePart}.csv")      // TODO
 //File outputCsv = new File(sourceLogFileDir.parentFile, "queryLogsExtracted-${new Date()}.csv")      // TODO
 char seperator = ',' as char
 CSVWriter csvWriter = new CSVWriter(new FileWriter(outputCsv));     // TODO -- problem with groovy magic and getting an actual char for params, just go with defaults...
-
-//File logFolder = new File('/Users/sean/work/lucidworks/Aerospace/logs/')
-//File solrLog = new File("/Users/sean/work/lucidworks/Aerospace/logs/shared.solr0.logs")       // replaced with looping through files in log dir...
 
 int logFileCount = 0
 sourceLogFileDir.eachFileMatch(~/.*solr.*logs?/) { File solrLog ->
